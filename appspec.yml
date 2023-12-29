@@ -1,0 +1,20 @@
+version: 0.0
+os: linux
+
+files:
+  - source: /
+    destination: /home/ec2-user/server
+
+hooks:
+  BeforeInstall:
+    - location: server_clear.sh
+      timeout: 300
+  AfterInstall:
+    - location: fix_privileges.sh
+      timeout: 300
+  ApplicationStart:
+    - location: server_start.sh
+      timeout: 20
+  ApplicationStop:
+    - location: server_stop.sh
+      timeout: 20
